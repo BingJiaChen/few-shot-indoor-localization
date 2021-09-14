@@ -43,7 +43,11 @@ class MyDataLoader(Dataset):
     data_few, label_few = data_preproc(np.asarray(pickle.load(open(target_path,'rb'))))
     
     data_full = np.concatenate((data_full,data_few))
-    temp_label = np.copy(label_few) + 16
+    if self.nway == 18:
+      source_label = 16
+    else:
+      source_label = 18
+    temp_label = np.copy(label_few) + source_label
     label_full = np.concatenate((label_full,temp_label))
     for i in range(len(label_full)):
         if label_full[i] not in full_data_dict:
@@ -57,7 +61,7 @@ class MyDataLoader(Dataset):
         else:
             few_data_dict[label_few[i]].append(data_few[i])
     
-    for i in range(16,34):
+    for i in range(source_label,34):
         full_data_dict[i] = full_data_dict[i][:self.nshot+1]
     return full_data_dict, few_data_dict
 
