@@ -1,7 +1,7 @@
-#  GNN-based Few-Shot Transfer Learning for Device-free Indoor Localization
+#  Few-Shot Transfer Learning for Device-Free Fingerprinting Indoor Localization
 
 ## Introduction:
-This is implementation of few-shot learning based on graph neural network for device-free CSI indoor localization. The main idea is using few-shot learning to transfer the localizing system to different domain with only few data.
+This is implementation of few-shot learning based on graph neural network (GNN) for device-free CSI indoor localization. The main idea is using few-shot learning to transfer the localizing system to different domain with only few data.
 
 This code is based on
 - https://github.com/louis2889184/gnn_few_shot_cifar100
@@ -9,11 +9,11 @@ This code is based on
 - https://github.com/sadbb/few-shot-fgnn
 
 ## Dataset:
-precollected CSI data from two different scenario
+precollected CSI data from two different scenario.
 
 ## Conception:
 ### system setup
-![](./img/system.png))
+![](./img/system.png)
 ### model structure
 ![](./img/few-shot.png)
 
@@ -22,7 +22,7 @@ Train for GNN with k-shot
 
 `python main.py --model GNN --shot k`
 
-Train for Attentive GNN with k-shot and $\beta=n$ (0.7)
+Train for Attentive GNN with k-shot and $\beta = n$ (0.7)
 
 `python main.py --model Attentive_GNN --shot k --beta n` 
 
@@ -43,7 +43,7 @@ Otherwise, the argument --source_path and --target_path can design the path of s
 
 ## Experiement Result:
 
-# Case I
+### Case I
 |                                |       18-way 1-shot      |      18-way 5-shot      |      18-way 10-shot     |
 |              :---:             |       :---:       |       :---:       |       :---:       |
 | **CNN**                        | 27.37% | 53.07% | 69.61% |
@@ -52,7 +52,7 @@ Otherwise, the argument --source_path and --target_path can design the path of s
 | **EGNN**                       | 49.47% | 72.16% | 87.33% |
 | **ChebyNet**                   | 47.19% | 74.75% | 85.55% | 
 
-# Case II
+### Case II
 |                                |       16-way 1-shot      |      16-way 5-shot      |      16-way 10-shot     |
 |              :---:             |       :---:       |       :---:       |       :---:       |
 | **CNN**                        | 29.00% | 51.47% | 72.59% |
