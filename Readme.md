@@ -20,9 +20,9 @@ precollected CSI data from two different scenario.
 ## Execution:
 Train for GNN with k-shot
 
-`python main.py --model GNN --shot k`
+`python main.py --model GNN --shot k` 
 
-Train for Attentive GNN with k-shot and $\beta = n$ (0.7)
+Train for Attentive GNN with k-shot and <img src="http://www.forkosh.com/mathtex.cgi? \beta = n (0.7)">
 
 `python main.py --model Attentive_GNN --shot k --beta n` 
 
