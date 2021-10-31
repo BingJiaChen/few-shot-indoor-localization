@@ -13,9 +13,9 @@ precollected CSI data from two different scenario
 
 ## Conception:
 ### system setup
-![](https://i.imgur.com/ic2Jexu.png)
+![](./img/system.png))
 ### model structure
-![](https://i.imgur.com/deRplI7.png)
+![](./img/few-shot.png)
 
 ## Execution:
 Train for GNN with k-shot
@@ -34,18 +34,32 @@ Train for ChebyNet with k-shot and Kg = n (3)
 
 `python main.py --model ChebyNet --shot k --Kg n`
 
-If you are unable to use GPU, please use argument --device cpu
-
 Where the value in brackets is default.
 
+If you are unable to use GPU, please use argument --device cpu
+
+Otherwise, the argument --source_path and --target_path can design the path of source domain and target domain data, respectively.
+
+
 ## Experiement Result:
-|                                |       1-shot      |       5-shot      |       10-shot     |
+
+# Case I
+|                                |       18-way 1-shot      |      18-way 5-shot      |      18-way 10-shot     |
 |              :---:             |       :---:       |       :---:       |       :---:       |
-| **pretrain**                   | 27.37% | 53.07% | 69.61% |
-| **GNN**                        | 35.63% | 75.82% | 86.91% | 
-| **Attentive_GNN**              | 38.81% | 76.28% | 88.31% | 
-| **EGNN**                       | 38.11% | 77.27% | 88.11% |
-| **ChebyNet**                   | 39.64% | 76.69% | 87.19% | 
+| **CNN**                        | 27.37% | 53.07% | 69.61% |
+| **GNN**                        | 37.51% | 66.70% | 85.25% | 
+| **Attentive_GNN**              | 44.17% | 72.05% | 85.23% | 
+| **EGNN**                       | 49.47% | 72.16% | 87.33% |
+| **ChebyNet**                   | 47.19% | 74.75% | 85.55% | 
+
+# Case II
+|                                |       16-way 1-shot      |      16-way 5-shot      |      16-way 10-shot     |
+|              :---:             |       :---:       |       :---:       |       :---:       |
+| **CNN**                        | 29.00% | 51.47% | 72.59% |
+| **GNN**                        | 63.14% | 72.11% | 87.78% | 
+| **Attentive_GNN**              | 70.69% | 84.16% | 89.45% | 
+| **EGNN**                       | 66.75% | 87.23% | 90.44% |
+| **ChebyNet**                   | 73.69% | 85.42% | 88.52% | 
 
 ## Dependencies:
 

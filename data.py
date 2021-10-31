@@ -91,28 +91,50 @@ class MyDataLoader(Dataset):
         single_one_hot_yi = []
         single_label_yi = []
         single_class_yi = []
+        if train:
+          for j, n_class in enumerate(sampled_classes):
+              if j == positive_class:
+                  sampled_data = random.sample(data_dict[n_class],num_shot+1)
+                  x.append(torch.from_numpy(sampled_data[0]))
+                  label_y.append(torch.LongTensor([j]))
+                  one_hot = torch.zeros(nway)
+                  one_hot[j] = 1.0
+                  one_hot_y.append(one_hot)
+                  class_y.append(torch.LongTensor([n_class]))
+                  shots_data = torch.Tensor(sampled_data[1:])
+              else:
+                  shots_data = torch.Tensor(random.sample(data_dict[n_class],num_shot))
+                  
+              single_xi += shots_data
+              single_label_yi.append(torch.LongTensor([j]).repeat(num_shot))
+              one_hot = torch.zeros(nway)
+              one_hot[j] = 1.0
+              single_one_hot_yi.append(one_hot.repeat(num_shot,1))
 
-        for j, n_class in enumerate(sampled_classes):
-            if j == positive_class:
-                sampled_data = random.sample(data_dict[n_class],num_shot+1)
-                x.append(torch.from_numpy(sampled_data[0]))
-                label_y.append(torch.LongTensor([j]))
-                one_hot = torch.zeros(nway)
-                one_hot[j] = 1.0
-                one_hot_y.append(one_hot)
-                class_y.append(torch.LongTensor([n_class]))
-                shots_data = torch.Tensor(sampled_data[1:])
-            else:
-                shots_data = torch.Tensor(random.sample(data_dict[n_class],num_shot))
-                
-            single_xi += shots_data
-            single_label_yi.append(torch.LongTensor([j]).repeat(num_shot))
-            one_hot = torch.zeros(nway)
-            one_hot[j] = 1.0
-            single_one_hot_yi.append(one_hot.repeat(num_shot,1))
-
-            label2class[j] = n_class
+              label2class[j] = n_class
         
+        else:
+          for j, n_class in enumerate(sampled_classes):
+              if j == positive_class:
+                  sampled_data = random.sample(data_dict[n_class][:num_shot+1],num_shot)
+                  x.append(torch.from_numpy(random.sample(data_dict[n_class][num_shot+1:],1)[0]))
+                  label_y.append(torch.LongTensor([j]))
+                  one_hot = torch.zeros(nway)
+                  one_hot[j] = 1.0
+                  one_hot_y.append(one_hot)
+                  class_y.append(torch.LongTensor([n_class]))
+                  shots_data = torch.Tensor(sampled_data)
+              else:
+                  shots_data = torch.Tensor(random.sample(data_dict[n_class][:num_shot+1],num_shot))
+                  
+              single_xi += shots_data
+              single_label_yi.append(torch.LongTensor([j]).repeat(num_shot))
+              one_hot = torch.zeros(nway)
+              one_hot[j] = 1.0
+              single_one_hot_yi.append(one_hot.repeat(num_shot,1))
+
+              label2class[j] = n_class
+
         shuffle_index = torch.randperm(num_shot*nway)
         xi.append(torch.stack(single_xi,0)[shuffle_index])
         label_yi.append(torch.cat(single_label_yi,dim=0)[shuffle_index])
