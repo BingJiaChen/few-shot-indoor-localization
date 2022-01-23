@@ -3,13 +3,18 @@
 ## Introduction:
 This is implementation of few-shot learning based on graph neural network (GNN) for device-free CSI indoor localization. The main idea is using few-shot learning to transfer the localizing system to different domain with only few data.
 
-This code is based on
+This code is for paper : 
+B.-J. Chen and R. Y. Chang, "Few-Shot Transfer Learning for Device-Free Fingerprinting Indoor Localization," IEEE International Conference on Communications (ICC), May 2022.
+
+The implementation code is reference on :
 - https://github.com/louis2889184/gnn_few_shot_cifar100
 - https://github.com/hazdzz/ChebyNet
 - https://github.com/sadbb/few-shot-fgnn
 
+
+
 ## Dataset:
-precollected CSI data from two different scenario.
+precollected CSI data from two different scenarios.
 
 ## Conception:
 ### system setup
